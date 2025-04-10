@@ -17,7 +17,7 @@ public class UserController {
 private MessageProducer messageProducer;
 
     @GetMapping("/userSending")
-    public void getMessageFromClient(@RequestParam("message") String message){
-       messageProducer.sendMsgToTopic(message);
+    public void getMessageFromClient(@RequestParam("message") String message,@RequestParam("name") String name,@RequestParam("location") String location){
+       messageProducer.sendMsgToTopic(message,name,location);
     }
 }

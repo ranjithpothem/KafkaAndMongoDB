@@ -7,16 +7,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Service
 public class MessageProducer {
     @Autowired
     private KafkaTemplate<String , Object> kafkaTemplate;
 
-    public void sendMsgToTopic(String message){
+    public void sendMsgToTopic(String message,String name,String location){
+
+        Thread.startVirtualThread(()->{
         Map<String,String> jsFormate= new HashMap<>();
         jsFormate.put("message",message);
-        kafkaTemplate.send("usermessage",jsFormate);
+        jsFormate.put("name",name);
+        jsFormate.put("location",location);
+        kafkaTemplate.send("usermessage1",jsFormate);
+        });
 }
 }
